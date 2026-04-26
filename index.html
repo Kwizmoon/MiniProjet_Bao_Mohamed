@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carnet de contacts</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>📇 Carnet de contacts</h1>
+        <p>420-245-AH — Programmation Web 1</p>
+    </header>
+
+    <main>
+        <!-- ══════ FORMULAIRE ══════ -->
+        <section class="form-section">
+            <h2>Ajouter un contact</h2>
+            <form id="form-contact">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" id="nom" placeholder="Ex: Dupont">
+                    </div>
+                    <div class="form-group">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" id="prenom" placeholder="Ex: Marie">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="telephone">Téléphone</label>
+                        <input type="tel" id="telephone" placeholder="Ex: 514-555-1234">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Courriel</label>
+                        <input type="email" id="email" placeholder="Ex: marie@mail.com">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="categorie">Catégorie</label>
+                    <select id="categorie">
+                        <option value="">— Choisir une catégorie —</option>
+                        <option value="Famille">Famille</option>
+                        <option value="Ami">Ami</option>
+                        <option value="Travail">Travail</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" id="btn-ajouter">Ajouter</button>
+                    <button type="button" data-js="btn-modifier" style="display:none;">Modifier</button>
+                    <button type="button" data-js="btn-annuler" style="display:none;">Annuler</button>
+                </div>
+            </form>
+            <p id="status"></p>
+        </section>
+
+        <!-- ══════ RECHERCHE ══════ -->
+        <section class="search-section">
+            <input type="search" id="recherche" placeholder="🔍 Rechercher un contact...">
+        </section>
+
+        <!-- ══════ LISTE DES CONTACTS ══════ -->
+        <section class="list-section">
+            <h2>Mes contacts <span id="compteur"></span></h2>
+            <div id="liste-contacts">
+                <!-- Les contacts seront affichés ici dynamiquement -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Mini-projet — 420-245-AH · Collège Ahuntsic · Hiver 2026</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
