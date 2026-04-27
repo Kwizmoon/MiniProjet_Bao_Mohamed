@@ -1,0 +1,270 @@
+/* ============================================================
+   MINI-PROJET — Carnet de contacts
+   420-245-AH | Programmation Web 1 | Collège Ahuntsic
+   NE PAS MODIFIER CE FICHIER
+   ============================================================ */
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ── Header ── */
+header {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+header h1 { font-size: 1.8rem; font-weight: 700; }
+header p { color: #94a3b8; font-size: .9rem; margin-top: 4px; }
+
+/* ── Main ── */
+main {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* ── Formulaire ── */
+.form-section {
+    background: white;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    margin-bottom: 20px;
+}
+.form-section h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+.form-group {
+    margin-bottom: 14px;
+}
+.form-group label {
+    display: block;
+    font-size: .85rem;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 4px;
+}
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: .95rem;
+    transition: border-color .2s;
+}
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99,102,241,.12);
+}
+
+/* Champ en erreur */
+.form-group input.erreur,
+.form-group select.erreur {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239,68,68,.1);
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+}
+.form-buttons button {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: .95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s;
+}
+.form-buttons button[type="submit"],
+.form-buttons button#btn-ajouter {
+    background: #6366f1;
+    color: white;
+}
+.form-buttons button[type="submit"]:hover,
+.form-buttons button#btn-ajouter:hover {
+    background: #4f46e5;
+}
+.form-buttons button[data-js="btn-modifier"] {
+    background: #f59e0b;
+    color: white;
+}
+.form-buttons button[data-js="btn-modifier"]:hover {
+    background: #d97706;
+}
+.form-buttons button[data-js="btn-annuler"] {
+    background: #e2e8f0;
+    color: #475569;
+}
+.form-buttons button[data-js="btn-annuler"]:hover {
+    background: #cbd5e1;
+}
+
+/* ── Status ── */
+#status {
+    margin-top: 12px;
+    font-size: .9rem;
+    font-weight: 600;
+    min-height: 20px;
+}
+
+/* ── Recherche ── */
+.search-section {
+    margin-bottom: 20px;
+}
+.search-section input {
+    width: 100%;
+    padding: 12px 18px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    background: white;
+    box-shadow: 0 1px 4px rgba(0,0,0,.04);
+}
+.search-section input:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99,102,241,.12);
+}
+
+/* ── Liste contacts ── */
+.list-section {
+    background: white;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+.list-section h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e2e8f0;
+}
+.list-section h2 span {
+    font-weight: 400;
+    color: #94a3b8;
+    font-size: .85rem;
+}
+
+/* ── Carte contact ── */
+.contact-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: .2s;
+}
+.contact-card:hover {
+    border-color: #6366f1;
+    box-shadow: 0 2px 8px rgba(99,102,241,.08);
+}
+.contact-info h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 4px;
+}
+.contact-info p {
+    font-size: .88rem;
+    color: #64748b;
+    margin: 2px 0;
+}
+.contact-categorie {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: .75rem;
+    font-weight: 600;
+    margin-top: 6px;
+}
+.contact-categorie.famille { background: #dbeafe; color: #1d4ed8; }
+.contact-categorie.ami { background: #d1fae5; color: #065f46; }
+.contact-categorie.travail { background: #fef3c7; color: #92400e; }
+.contact-categorie.autre { background: #f1f5f9; color: #475569; }
+
+.contact-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+.contact-actions button {
+    padding: 6px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background: white;
+    font-family: inherit;
+    font-size: .82rem;
+    cursor: pointer;
+    transition: .2s;
+}
+.contact-actions button.btn-edit {
+    color: #6366f1;
+    border-color: #c7d2fe;
+}
+.contact-actions button.btn-edit:hover {
+    background: #eef2ff;
+}
+.contact-actions button.btn-delete {
+    color: #ef4444;
+    border-color: #fecaca;
+}
+.contact-actions button.btn-delete:hover {
+    background: #fef2f2;
+}
+
+/* ── Message vide ── */
+.empty-message {
+    text-align: center;
+    padding: 40px;
+    color: #94a3b8;
+    font-size: .95rem;
+}
+
+/* ── Footer ── */
+footer {
+    text-align: center;
+    padding: 24px;
+    color: #94a3b8;
+    font-size: .82rem;
+    margin-top: 40px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .form-row { grid-template-columns: 1fr; }
+    .contact-card { flex-direction: column; gap: 12px; }
+    .contact-actions { align-self: flex-end; }
+}
