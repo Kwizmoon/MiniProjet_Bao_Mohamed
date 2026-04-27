@@ -6,7 +6,7 @@
 //   Nom 1 : Mohamed Banwan 
 //   Nom 2 : Bao Tran Bach
 //
-// Date : ___2026-04-27_______________________
+// Date : ___2026-04-27____
 // ============================================================
 
 // 1. Importer les modules nécessaires
