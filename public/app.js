@@ -67,7 +67,7 @@ function afficherContacts(contacts){
 
 //----------------AJOUTER UN CONTACT--------------------//
 
-elForm.addEventListener("submit", async (e) => {
+elForm.addEventListener("submit", async (e) => {   // Hello
     e.preventDefault();
 
     let isValid = true;
