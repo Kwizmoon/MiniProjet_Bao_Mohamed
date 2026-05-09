@@ -4,8 +4,7 @@
 // ============================================================
 
 // 1. Importer mongoose
-const express = require("express");
-const app = express();
+
 const mongoose = require("mongoose");
 
 // 2. Créer le schéma du contact

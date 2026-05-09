@@ -15,5 +15,14 @@
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "mongoose": "^9.5.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kwizmoon/MiniProjet_Bao_Mohamed.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Kwizmoon/MiniProjet_Bao_Mohamed/issues"
+  },
+  "homepage": "https://github.com/Kwizmoon/MiniProjet_Bao_Mohamed#readme"
 }
