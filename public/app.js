@@ -43,7 +43,7 @@ async function chargerContact(){
         }else{
             const contacts = await response.json();
             afficherContacts(contacts);
-            elCompteur.innerHTML += `${contacts.length} contacts${contacts.length > 1 ? "s" : ""} dans votre liste`;
+            elCompteur.innerHTML += `${contacts.length} contact${contacts.length > 1  || contacts.length === 0 ? "s" : ""} dans votre liste`;
         }
     }catch(error){
         elStatus.textContent = "Erreur - Le serveur n'a pas démarré !";
@@ -60,7 +60,19 @@ function afficherContacts(contacts){
         return;
     }else{
         contacts.foreach(contact => {
+            html += `
+                <div class="contact-card">
+                    <div class="contact-info">
+
+
             
+            
+            
+            
+            
+                    </div>
+                </div>
+            `
         })
     }
 }
