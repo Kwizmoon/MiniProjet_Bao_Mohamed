@@ -6,7 +6,7 @@
 //   Nom 1 : Mohamed Banwan 
 //   Nom 2 : Bao Tran Bach
 //
-// Date : ___2026-04-27__--
+// Date : ___2026-05-05__
 // ============================================================
 
 // 1. Importer les modules nécessaires
@@ -14,6 +14,7 @@
 //    - mongoose
 //    - cors
 //    - Le modèle Contact depuis ./models/Contact.js
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -30,7 +31,7 @@ app.use(express.json());
 //    - URL : mongodb://localhost:27017/carnet_contacts
 mongoose.connect("mongodb://localhost:27017/carnet_contacts")
     .then(() => {
-        console.log("Connecté à MongoB");
+        console.log("Connecté à MongoB (•‿•)");
     })
     .catch((err) => {
         console.log("Erreur MongoDB : " + err)
