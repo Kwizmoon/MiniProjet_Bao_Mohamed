@@ -52,10 +52,7 @@ app.get("/api/contacts", async(req,res) => {
 // GET /api/contacts/:id — Récupérer un contact par son id
 app.get("/api/contacts/:id", async(req,res) => {
     try{
-        let contact = await Contact.findById(
-            req.params.id,
-            
-        );
+        let contact = await Contact.findById(req.params.id);
         if(!contact){
             res.status(404).json({message : `${id} : Contact non trouvé`})
         }
@@ -68,7 +65,6 @@ app.get("/api/contacts/:id", async(req,res) => {
 
 // POST /api/contacts — Ajouter un nouveau contact
 app.post("/api/contacts", async(req,res) => {
-
     try{
         let newContact = new Contact({
             nom : req.body.nom,

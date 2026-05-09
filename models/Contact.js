@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 // 2. Créer le schéma du contact
 //    Champs : nom, prenom, telephone, email, categorie
 //    Tous les champs sont de type String et requis (required: true)
+
 const contactSchema = new mongoose.Schema({
     nom : {type : String, required : true},
     prenom : {type : String, required : true},
