@@ -124,6 +124,7 @@ elForm.addEventListener("submit", async (e) => {   // Hello
 
 //--------------------SUPPRIMER UN CONTACT----------------------//
 
+
 //--------------------RECHERCHE DE CONTACT----------------------//
 
 elRecherche.addEventListener("input", async() => {

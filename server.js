@@ -43,7 +43,7 @@ app.get("/api/contacts", (req,res) => {
         let contacts = await Contact.find();
         res.json(contacts);
     }catch(error){
-        res.status(400).json({message : `${id} : Contact non trouvé`, Erreur : error})
+        res.status(500).json({message : `${id} : Contact non trouvé`, Erreur : error})
     }
 })
 
