@@ -35,7 +35,7 @@ let elRecherche = document.querySelector("#recherche");
 let elCompteur = document.querySelector("#compteur");
 let btnModifier = document.querySelector("[data-js='btn-modifier']");
 
-async function chargerContact(){
+async function chargerContacts(){
     try{
         const response = await fetch("/api/contacts");
         if(!response.ok){
@@ -59,21 +59,21 @@ function afficherContacts(contacts){
         elStatus.textContent = "Aucun contact";
         return;
     }else{
-        contacts.foreach(contact => {
+        contacts.forEach(contact => {
             html += `
                 <div class="contact-card">
                     <div class="contact-info">
-
-
-            
-            
-            
-            
-            
+                        <h3>${contact.prenom} ${contact.nom}</h3>
+                        <p>${contact.telephone}</p>
+                        <p>${contact.email}</p>  
+                    </div>
+                    <div class="contact-categorie">
+                        ${contact.categorie}
                     </div>
                 </div>
             `
-        })
+        });
+        elListe.innerHTML = html;
     }
 }
 

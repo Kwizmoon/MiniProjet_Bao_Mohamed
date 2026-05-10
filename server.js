@@ -31,7 +31,7 @@ app.use(express.json());
 //    - URL : mongodb://localhost:27017/carnet_contacts
 mongoose.connect("mongodb://localhost:27017/carnet_contacts")
     .then(() => {
-        console.log("Connecté à MongoB (•‿•)");
+        console.log("Connecté à MongoDB (•‿•)");
     })
     .catch((err) => {
         console.log("Erreur MongoDB : " + err)
