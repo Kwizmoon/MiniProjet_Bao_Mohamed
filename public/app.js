@@ -95,8 +95,8 @@ function afficherContacts(contacts){
         elListe.innerHTML = html;
 
 
-//--------------------MODIFIER DE CONTACT----------------------//
-//--------------------SUPPRIMER UN CONTACT----------------------//
+//--------------------MODIFIER / SUPPRIMER UN CONTACT----------------------//
+
         elListe.addEventListener("click", async(e) => {
             const btnDelete = e.target.closest("[data-js='btn-delete']");
             const btnEdit = e.target.closest("[data-js='btn-edit']")
