@@ -6,7 +6,7 @@
 //   Nom 1 : Mohamed Banwan 
 //   Nom 2 : Bao Tran Bach
 //
-// Date : ___2026-05-05__
+// Date : ___2026-05-11__
 // ============================================================
 
 // 1. Importer les modules nécessaires
@@ -16,14 +16,17 @@
 //    - Le modèle Contact depuis ./models/Contact.js
 
 const express = require("express");
-const app = express();
+const cors = require("cors");
 const mongoose = require("mongoose");
 const Contact = require("./models/Contact");
+
+const app = express();
 
 // 2. Créer l'application Express et configurer les middlewares
 //    - express.json() pour parser le body des requêtes
 //    - cors() pour autoriser les requêtes du client
 
+app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
 

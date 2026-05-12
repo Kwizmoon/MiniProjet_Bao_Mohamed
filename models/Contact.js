@@ -1,6 +1,12 @@
 // ============================================================
-// MINI-PROJET — Modèle Contact (Mongoose)
+// MINI-PROJET — Carnet de contacts
 // 420-245-AH | Programmation Web 1 | Collège Ahuntsic
+//
+// Équipe :
+//   Nom 1 : Mohamed Banwan
+//   Nom 2 : Bao Tran Bach
+//
+// Date : ______2026-05-11_______
 // ============================================================
 
 // 1. Importer mongoose

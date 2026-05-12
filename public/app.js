@@ -6,22 +6,12 @@
 //   Nom 1 : Mohamed Banwan
 //   Nom 2 : Bao Tran Bach
 //
-// Date : __________________________
+// Date : ______2026-05-11_______
 // ============================================================
 
 const API_URL = "http://localhost:3000/api/contacts";
 
 // VOTRE CODE JAVASCRIPT ICI
-// <form id="form-contact">
-// id="nom"
-// id="prenom"
-// id="telephone"
-// id="email"
-// id="categorie"
-// <div id="liste-contacts">
-// id="status"
-// id="recherche"
-// id="compteur"
 
 let elForm = document.querySelector("#form-contact");
 let elNom = document.querySelector("#nom");
@@ -34,6 +24,8 @@ let elStatus = document.querySelector("#status");
 let elRecherche = document.querySelector("#recherche");
 let elCompteur = document.querySelector("#compteur");
 let btnModifier = document.querySelector("[data-js='btn-modifier']");
+
+//----------------CHARGER UN CONTACT-------------------//
 
 async function chargerContacts(){
 
@@ -48,17 +40,19 @@ async function chargerContacts(){
             elCompteur.innerHTML = `${contacts.length} contact${contacts.length > 1  || contacts.length === 0 ? "s" : ""} dans votre liste`;
         }
     }catch(error){
-        elStatus.textContent = "Erreur - Le serveur n'a pas démarré !";
+        elStatus.textContent = "Erreur - Le serveur n'a pas démarré ! ꒰•⌓•꒱";
         console.error(error);
     }
 }
+
+//----------------AFFICHER UN CONTACT----------------//
 
 function afficherContacts(contacts){
     elListe.innerHTML = "";
     let html = "";
 
     if(contacts.length === 0){
-        elStatus.textContent = "Aucun contact";
+        elStatus.textContent = "Aucun contact （◞‸◟）";
         return;
     }else{
         contacts.forEach(contact => {
@@ -102,6 +96,8 @@ function afficherContacts(contacts){
             const btnEdit = e.target.closest("[data-js='btn-edit']")
 
             if (btnEdit) {
+                elStatus.textContent = "";
+                
                 const carte = btnEdit.closest(".contact-card");
                 const btnModifier = document.querySelector("[data-js='btn-modifier']");
                 const btnAnnuler = document.querySelector("[data-js='btn-annuler']");
@@ -122,8 +118,8 @@ function afficherContacts(contacts){
                 elEmail.value = email;
                 elCategorie.value = categorie;
 
-
                 btnModifier.addEventListener("click", async() => {
+                    
 
                     const nom = elNom.value;
                     const prenom = elPrenom.value;
@@ -140,12 +136,12 @@ function afficherContacts(contacts){
                     if(!response.ok){
                         throw new Error("Erreur HTTP : " + response.status);
                     }
-                    elStatus.textContent = "Contact modifié avec succès !";
+                    elStatus.textContent = "Contact modifié avec succès ! (•‿•)";
 
                     chargerContacts();
 
                     }catch(error){
-                        elStatus.textContent = `Erreur - Le contact ne peut pas être modifié  - `
+                        elStatus.textContent = `Erreur - Le contact ne peut pas être modifié  - （◞‸◟）`
                     }
                 })
 
@@ -159,10 +155,10 @@ function afficherContacts(contacts){
 
                     btnModifier.style.display = "none";
                     btnAnnuler.style.display = "none";
-                })
 
-                    
-                
+                    elStatus.textContent = "";
+                })
+     
             }
 
             if (btnDelete) {
@@ -177,7 +173,7 @@ function afficherContacts(contacts){
                         if(!response.ok){
                             throw new Error("Erreur HTTP : " + response.status);
                         }
-                        elStatus.textContent = "Contact supprimé avec succès !";
+                        elStatus.textContent = "Contact supprimé avec succès ! (•‿•)";
 
                         chargerContacts();
 
@@ -186,10 +182,7 @@ function afficherContacts(contacts){
                     }
                 }
 
-            }
-
-
-            
+            }  
         })
     }
 }
@@ -259,7 +252,7 @@ elForm.addEventListener("submit", async (e) => {   // Hello
             if(!response.ok){
                 throw new Error("Erreur HTTP : " + response.status);
             }
-            elStatus.textContent = "Contact ajouté avec succès !";
+            elStatus.textContent = "Contact ajouté avec succès ! (•‿•)";
 
             chargerContacts();
 
@@ -287,7 +280,7 @@ elRecherche.addEventListener("input", async() => {
             afficherContacts(contactsFiltre);
         }
     }catch(error){
-        elStatus.textContent = "Erreur de recherche :( !";
+        elStatus.textContent = "Erreur de recherche ◕︵◕ !";
         console.error(error);
 
     }
