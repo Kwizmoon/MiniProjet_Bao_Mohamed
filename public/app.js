@@ -100,7 +100,7 @@ function afficherContacts(contacts){
         elListe.addEventListener("click", async(e) => {
             const btnDelete = e.target.closest("[data-js='btn-delete']");
             const btnEdit = e.target.closest("[data-js='btn-edit']")
-            
+
             if (btnEdit) {
                 const carte = btnEdit.closest(".contact-card");
                 const btnModifier = document.querySelector("[data-js='btn-modifier']");

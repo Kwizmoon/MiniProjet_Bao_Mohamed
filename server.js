@@ -45,7 +45,7 @@ app.get("/api/contacts", async(req,res) => {
         let contacts = await Contact.find();
         res.json(contacts);
     }catch(error){
-        res.status(500).json({message : `${id} : Contact non trouvé`, Erreur : error})
+        res.status(500).json({message : `${req.params.id} : Contact non trouvé`, Erreur : error})
     }
 })
 
@@ -54,19 +54,19 @@ app.get("/api/contacts/:id", async(req,res) => {
     try{
         let contact = await Contact.findById(req.params.id);
         if(!contact){
-            res.status(404).json({message : `${id} : Contact non trouvé`})
+            return res.status(404).json({message : `${req.params.id} : Contact non trouvé`})
         }
             res.json(contact);
         
     }catch(err){
-        res.status(404).json({message : `${id} : Contact non trouvé`, Erreur : err})
+        res.status(404).json({message : `${req.params.id} : Contact non trouvé`, Erreur : err})
     }
 })
 
 // POST /api/contacts — Ajouter un nouveau contact
 app.post("/api/contacts", async(req,res) => {
     try{
-        let newContact = new Contact({
+        let newContact = await new Contact({
             nom : req.body.nom,
             prenom : req.body.prenom,
             telephone : req.body.telephone,
@@ -95,11 +95,11 @@ app.put("/api/contacts/:id", async(req,res) => {
             {returnDocument : `after`}
         );
         if(!contact){
-            res.status(404).json({message : `${id} - Contact introuvable`});
+            res.status(404).json({message : `${req.params.id} - Contact introuvable`});
         }
         res.json(contact);
     }catch(error){
-        res.status(404).json({message : `${id} - Contact introuvable`, Erreur : error.message})
+        res.status(404).json({message : `${req.params.id} - Contact introuvable`, Erreur : error.message})
     }
 })
 
@@ -108,11 +108,11 @@ app.delete("/api/contacts/:id", async(req,res) => {
     try{
         let contact = await Contact.findByIdAndDelete(req.params.id)
         if(!contact){
-            res.status(404).json({message : `${id} - Contact introuvable`});
+            res.status(404).json({message : `${req.params.id} - Contact introuvable`});
         }
         res.json(contact);
     }catch(error){
-        res.status(404).json({message : `${id} - Contact introuvable`});
+        res.status(404).json({message : `${req.params.id} - Contact introuvable`});
     }
 })
 
