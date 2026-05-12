@@ -24,6 +24,7 @@ let elStatus = document.querySelector("#status");
 let elRecherche = document.querySelector("#recherche");
 let elCompteur = document.querySelector("#compteur");
 let btnModifier = document.querySelector("[data-js='btn-modifier']");
+let btnAnnuler = document.querySelector("[data-js='btn-annuler']");
 
 //----------------CHARGER UN CONTACT-------------------//
 
@@ -44,6 +45,104 @@ async function chargerContacts(){
         console.error(error);
     }
 }
+
+
+//--------------------MODIFIER / SUPPRIMER UN CONTACT----------------------//
+
+let idEnCoursEdition = null; // Contiendra l'ID du contact qu'on est en train de modifier (pour pas modifier plusieurs contacts en meme temps)
+
+ elListe.addEventListener("click", async(e) => {
+
+    const btnDelete = e.target.closest("[data-js='btn-delete']");
+    const btnEdit = e.target.closest("[data-js='btn-edit']")
+
+    if (btnDelete) {
+        const carte = btnDelete.closest(".contact-card");
+        const id = carte.dataset.id;
+        const prenom = carte.dataset.prenom;
+
+        if (confirm(`Êtes-vous sûre de vouloir supprimer ${prenom}?`)) { // francais!!!!!!!
+            try{
+                const response = await fetch(`/api/contacts/${id}`, { method : "DELETE"})
+                
+                if(!response.ok){
+                    throw new Error("Erreur HTTP : " + response.status);
+                }
+                elStatus.textContent = "Contact supprimé avec succès ! (•‿•)";
+
+                chargerContacts();
+
+            }catch(error){
+                elStatus.textContent = `Erreur - Le contact ne peut pas être supprimé. - `
+            }
+        }
+
+    } 
+    
+    if (btnEdit) {
+        elStatus.textContent = "";
+        
+        const carte = btnEdit.closest(".contact-card");
+    
+        btnModifier.style.display = "block";
+        btnAnnuler.style.display = "block";
+
+        idEnCoursEdition = carte.dataset.id;  // mémorise l'ID dans la variable globale
+        const nom = carte.dataset.nom;
+        const prenom = carte.dataset.prenom;
+        const telephone = carte.dataset.telephone;
+        const email = carte.dataset.email;
+        const categorie = carte.dataset.categorie;
+        
+        elNom.value = nom;
+        elPrenom.value = prenom;
+        elTelephone.value = telephone;
+        elEmail.value = email;
+        elCategorie.value = categorie;
+    }
+})
+
+btnModifier.addEventListener("click", async() => {
+    if (!idEnCoursEdition) return; // Pour pas modifier plus d'un contact
+
+    const nom = elNom.value;
+    const prenom = elPrenom.value;
+    const telephone = elTelephone.value;
+    const email = elEmail.value;
+    const categorie = elCategorie.value;
+
+    try{
+    const response = await fetch(`/api/contacts/${idEnCoursEdition}`, {
+        method : "PUT",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify({nom, prenom, telephone, email, categorie})
+    })
+    if(!response.ok){
+        throw new Error("Erreur HTTP : " + response.status);
+    }
+    elStatus.textContent = "Contact modifié avec succès ! (•‿•)";
+    idEnCoursEdition = null; // réinitialiser
+    chargerContacts();
+
+    }catch(error){
+        elStatus.textContent = `Erreur - Le contact ne peut pas être modifié  - （◞‸◟）`
+    }
+})
+
+btnAnnuler.addEventListener("click", () => {
+    idEnCoursEdition = null;
+    
+    elNom.value = "";
+    elPrenom.value = "";
+    elTelephone.value = "";
+    elEmail.value = "";
+    elCategorie.value = "";
+
+    btnModifier.style.display = "none";
+    btnAnnuler.style.display = "none";
+
+    elStatus.textContent = "";
+})
 
 //----------------AFFICHER UN CONTACT----------------//
 
@@ -86,104 +185,7 @@ function afficherContacts(contacts){
             `
         });
         
-        elListe.innerHTML = html;
-
-
-//--------------------MODIFIER / SUPPRIMER UN CONTACT----------------------//
-
-        elListe.addEventListener("click", async(e) => {
-            const btnDelete = e.target.closest("[data-js='btn-delete']");
-            const btnEdit = e.target.closest("[data-js='btn-edit']")
-
-            if (btnEdit) {
-                elStatus.textContent = "";
-                
-                const carte = btnEdit.closest(".contact-card");
-                const btnModifier = document.querySelector("[data-js='btn-modifier']");
-                const btnAnnuler = document.querySelector("[data-js='btn-annuler']");
-
-                btnModifier.style.display = "block";
-                btnAnnuler.style.display = "block";
-
-                const id = carte.dataset.id;
-                const nom = carte.dataset.nom;
-                const prenom = carte.dataset.prenom;
-                const telephone = carte.dataset.telephone;
-                const email = carte.dataset.email;
-                const categorie = carte.dataset.categorie;
-                
-                elNom.value = nom;
-                elPrenom.value = prenom;
-                elTelephone.value = telephone;
-                elEmail.value = email;
-                elCategorie.value = categorie;
-
-                btnModifier.addEventListener("click", async() => {
-                    
-
-                    const nom = elNom.value;
-                    const prenom = elPrenom.value;
-                    const telephone = elTelephone.value;
-                    const email = elEmail.value;
-                    const categorie = elCategorie.value;
-
-                    try{
-                    const response = await fetch(`/api/contacts/${id}`, {
-                        method : "PUT",
-                        headers : {"Content-Type" : "application/json"},
-                        body : JSON.stringify({nom, prenom, telephone, email, categorie})
-                    })
-                    if(!response.ok){
-                        throw new Error("Erreur HTTP : " + response.status);
-                    }
-                    elStatus.textContent = "Contact modifié avec succès ! (•‿•)";
-
-                    chargerContacts();
-
-                    }catch(error){
-                        elStatus.textContent = `Erreur - Le contact ne peut pas être modifié  - （◞‸◟）`
-                    }
-                })
-
-                btnAnnuler.addEventListener("click", () => {
-
-                    elNom.value = "";
-                    elPrenom.value = "";
-                    elTelephone.value = "";
-                    elEmail.value = "";
-                    elCategorie.value = "";
-
-                    btnModifier.style.display = "none";
-                    btnAnnuler.style.display = "none";
-
-                    elStatus.textContent = "";
-                })
-     
-            }
-
-            if (btnDelete) {
-                const carte = btnDelete.closest(".contact-card");
-                const id = carte.dataset.id;
-                const prenom = carte.dataset.prenom;
-
-                if (confirm(`Êtes-vous sûre de vouloir supprimer ${prenom}?`)) { // francais!!!!!!!
-                    try{
-                        const response = await fetch(`/api/contacts/${id}`, { method : "DELETE"})
-                        
-                        if(!response.ok){
-                            throw new Error("Erreur HTTP : " + response.status);
-                        }
-                        elStatus.textContent = "Contact supprimé avec succès ! (•‿•)";
-
-                        chargerContacts();
-
-                    }catch(error){
-                        elStatus.textContent = `Erreur - Le contact ne peut pas être supprimé. - `
-                    }
-                }
-
-            }  
-        })
+        elListe.innerHTML = html;         
     }
 }
 
